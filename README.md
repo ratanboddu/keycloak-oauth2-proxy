@@ -27,7 +27,7 @@ User authentication and authorization tool
 
 ## Deploying Keycloak
 
-1.  Navigate to the `keycloak` folder and set the necessary environment variables for Keycloak [More information on variable here](https://hub.docker.com/r/jboss/keycloak/)
+1.  Navigate to the `keycloak` folder and set the necessary environment variables for Keycloak. [More information on variable here](https://hub.docker.com/r/jboss/keycloak/)
 
     a. KEYCLOAK_USER : default User
 
@@ -111,4 +111,11 @@ User authentication and authorization tool
       For more details on the remaining values you can refer [here](https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview/)
 
 2.  Navigate to the `oauth2-proxy` folder and set the necessary vallues in the `oauth_configmap2.yaml`
+
     - Here, we need tp update the Keycloak URL for Logout in the `error.html` section
+
+3.  After successfully updating all the necessary values, we can deploy all the yamls using the below command
+
+```
+kubectl apply -f oauth2-proxy/.
+```
