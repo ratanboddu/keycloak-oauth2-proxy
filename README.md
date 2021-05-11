@@ -18,6 +18,18 @@ Setting up minikube
 
    For this demo we will be using `domain_name` as `ratanboddu`
 
+3. Ensure that you have the `nginx-ingress` addon enabled. You can use below command to verify
+
+   ```
+   minikube addons list
+   ```
+
+   If you dont have it enabled, you can use the below command to enable it.
+
+   ```
+   minikube addons enable ingress
+   ```
+
 # Keycloak
 
 User authentication and authorization tool
