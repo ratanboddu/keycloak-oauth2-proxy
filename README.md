@@ -86,10 +86,12 @@ User authentication and authorization tool
 2. Create a new client scope called `api` with the default settings
 
 3. Click on the `Mappers` tab, create a new mapper called `groups` with below settings and Save.
-   [CreateProtocolMapper](/images/CreateProtocolMapper.png)
+
+   ![CreateProtocolMapper](/images/CreateProtocolMapper.png)
 
 4. Click `Add Builtin` and add `username`, `email`, `profile`.
-   [AddBuiltin](/images/AddBuiltin.png)
+
+   ![AddBuiltin](/images/AddBuiltin.png)
 
 5. Add this newly created scope to your existing Client at
    `Clients -> Your_Client_Name -> Client Scopes`
