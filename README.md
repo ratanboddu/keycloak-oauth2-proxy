@@ -1,3 +1,5 @@
+This is a small PoC for understanding the working and deploying Keycloak and OAuth2-proxy in local k8s environment.
+
 # Minikube
 
 Setting up minikube
@@ -128,6 +130,27 @@ User authentication and authorization tool
 
 3.  After successfully updating all the necessary values, we can deploy all the yamls using the below command
 
-```
-kubectl apply -f oauth2-proxy/.
-```
+    ```
+    kubectl apply -f oauth2-proxy/.
+    ```
+
+# Deploying Sample Flask Application
+
+This application is a sample flask applicatioin which can be deployed to demonstrate the authentication for apis.
+
+1. Navigate to the `flask-application/k8s_mamifest` folder
+
+   - Here in the `ingress.yaml`, we will need to add the following annotations to make the servic secure.
+
+   ```
+   nginx.ingress.kubernetes.io/auth-signin: http://auth.<domain_name>.com/oauth2/start?rd=https%3A%2F%2F$host$request_uri
+   nginx.ingress.kubernetes.io/auth-url: http://auth.<domain_name>.com/oauth2/auth
+   ```
+
+   Here, replace the `domain_name` with your domain name.
+
+2. After successfully updating all the necessary values, we can deploy all the yamls using the below command
+
+   ```
+   kubectl apply -f flask-application/k8s_manifest/.
+   ```
