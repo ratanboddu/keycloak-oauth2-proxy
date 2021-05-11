@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: oauth2-proxy-config
+  namespace: default
+data:
+  oauth2-proxy.cfg: |+
+    # Provider config
+    provider="keycloak"
+    provider_display_name="RatanB Login"
+    login_url="http://keycloak.ratanboddu.com/auth/realms/master/protocol/openid-connect/auth"
+    redeem_url="http://keycloak.ratanboddu.com/auth/realms/master/protocol/openid-connect/token"
+    validate_url="http://keycloak.ratanboddu.com/auth/realms/master/protocol/openid-connect/userinfo"
+    ssl_insecure_skip_verify=true
+    # Client config
+    client_id="kubernetes"
+    client_secret="e1d3a4c4-25c9-4030-b682-402d3e3abb1b"
+    cookie_secret="OQINaROshtE9TcZkNAm5Zs2Pv3xaWytBmc5W7sPX7ws="
+    cookie_secure="false"
+    cookie_refresh="1m"
+    # Upstream config
+    http_address="0.0.0.0:3000"
+    upstreams="http://ratanboddu.com/"
+    # Proxy Config
+    keycloak_group="/DemoAdmin"
+    #user_id_claim="preferred_username"
+    skip_auth_routes=["/health.*"]
+    skip_provider_button="true"
+    reverse_proxy="true"
+    email_domains=["*"]
+    cookie_domains=[".ratanboddu.com"]
+    whitelist_domains=[".ratanboddu.com:*"]
+    custom_templates_dir="/templates"

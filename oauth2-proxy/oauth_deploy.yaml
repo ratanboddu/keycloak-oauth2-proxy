@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx
+        - name: oauth2-proxy
+          image: ratanboddu/oauth2-proxy:v7.0.0
+          imagePullPolicy: Always
+          args:
+            - --config=/etc/oauth2-proxy.cfg
+          ports:
+            - containerPort: 3000
+              name: web
+          volumeMounts:
+            - name: oauth2-proxy-config
+              mountPath: /etc/oauth2-proxy.cfg
+              subPath: oauth2-proxy.cfg
+            - name: oauth2-templates
+              mountPath: /templates
+      volumes:
+        - name: oauth2-proxy-config
+          configMap:
+            name: oauth2-proxy-config
+        - name: oauth2-templates
+          configMap:
+            name: oauth2-templates

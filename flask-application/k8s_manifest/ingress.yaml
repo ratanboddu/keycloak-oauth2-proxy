@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: sample-flask-app
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/auth-signin: http://auth.ratanboddu.com/oauth2/start?rd=https%3A%2F%2F$host$request_uri
+    nginx.ingress.kubernetes.io/auth-url: http://auth.ratanboddu.com/oauth2/auth
+spec:
+  rules:
+  - host: ratanboddu.com
+    http:
+      paths:
+      - path: /app1
+        backend:
+          serviceName: sample-flask-app
+          servicePort: 5678
+
